@@ -1,1 +1,1 @@
-web: gunicorn outlab4SSL.wsgi.py
+web: gunicorn outlab4SSL.wsgi
