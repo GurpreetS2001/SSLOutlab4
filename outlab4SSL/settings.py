@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['outlab-4.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -134,4 +134,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/accounts/profile'
 LOGOUT_REDIRECT_URL = '/'
 
-STATIC_ROOT=['0.0.0.0:5001','127.0.0.1','outlab-4.herokuapp.com']
