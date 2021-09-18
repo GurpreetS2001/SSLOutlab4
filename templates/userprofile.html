@@ -7,17 +7,19 @@
   <h1>{{pageHead}}</h1>
   <h3>{{followers}} followers</h3>
   <h3>profile last updated: {{last_updated}}</h3>
+  {% if refresh %}
+  <form action='/accounts/profile/' method="POST">
+  {% csrf_token %}
+  <button type="submit" value="Refresh Data" name="selected_user" class="btn btn-link">Update Now</button>
+  <!-- <input type="submit" value="Refresh Data" name="selected_user"> -->
+  </form>
+  {% endif %}
   <ul>
     {% for repo in repos %}
         <li>{{ repo.repo_name }} - {{repo.stars}} stars</li>
     {% endfor %}
   </ul>
-  {% if refresh %}
-  <form action='/accounts/profile/' method="POST">
-  {% csrf_token %}
-  <input type="submit" value="Refresh Data" name="selected_user">
-  </form>
-  {% endif %}
+  
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">Log In</a>
