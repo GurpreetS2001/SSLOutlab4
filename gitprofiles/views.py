@@ -29,7 +29,7 @@ def getUserDetails(request):
                 json_data2=data2.json()
                 getProfile=Profile.objects.filter(user_id=request.user.pk)
                 getProfile[0].followers=json_data1['followers']
-                getProfile[0].last_updated=datetime.now(pytz.timezone('Asia/Kolkata'))
+                getProfile[0].last_updated=datetime.now().astimezone(pytz.timezone('Asia/Kolkata')).replace(tzinfo=None)
                 getProfile[0].save()
                 repos=Repository.objects.filter(profile_id=Profile.objects.filter(user_id=request.user.pk)[0].pk)
                 for i in range(0,repos.count()):
@@ -80,7 +80,7 @@ def getUserDetails(request):
                 if(data1.status_code==200 & data2.status_code==200):
                     json_data1=data1.json()
                     json_data2=data2.json()
-                    newprofile=Profile.objects.create(user=request.user,followers=json_data1['followers'],last_updated=datetime.now(pytz.timezone('Asia/Kolkata')))
+                    newprofile=Profile.objects.create(user=request.user,followers=json_data1['followers'],last_updated=datetime.now().astimezone(pytz.timezone('Asia/Kolkata')).replace(tzinfo=None))
                     for repos in json_data2:
                         repo=Repository(profile=newprofile,repo_name=repos['name'],stars=repos['stargazers_count'])
                         repo.save()
