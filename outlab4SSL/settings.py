@@ -134,4 +134,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/accounts/profile'
 LOGOUT_REDIRECT_URL = '/'
 
-STATIC_ROOT=['0.0.0.0:5001','127.0.0.1']
+STATIC_ROOT=['0.0.0.0:5001','127.0.0.1','outlab-4.herokuapp.com']
