@@ -2,7 +2,8 @@ from django.http import response
 from .models import Profile, Repository
 from django.contrib.auth.models import User
 from django.shortcuts import render
-
+from datetime import datetime
+import pytz
 # Create your views here.
 
 from django.contrib.auth.forms import UserCreationForm
@@ -28,7 +29,7 @@ def getUserDetails(request):
                 json_data2=data2.json()
                 getProfile=Profile.objects.filter(user_id=request.user.pk)
                 getProfile[0].followers=json_data1['followers']
-                getProfile[0].last_updated=json_data1['updated_at']
+                getProfile[0].last_updated=datetime.now(pytz.timezone('Asia/Kolkata'))
                 getProfile[0].save()
                 repos=Repository.objects.filter(profile_id=Profile.objects.filter(user_id=request.user.pk)[0].pk)
                 for i in range(0,repos.count()):
@@ -52,7 +53,7 @@ def getUserDetails(request):
                 #     for i in range(len(json_data2),repos.count):
                 #         repos[i].delete()
                 refresh=True
-                repos=Repository.objects.filter(profile_id=Profile.objects.filter(user_id=request.user.pk)[0].pk)
+                repos=Repository.objects.filter(profile_id=Profile.objects.filter(user_id=request.user.pk)[0].pk).order_by('-stars')
                 return render(request,'userprofile.html',{'pageHead':pageHead,'followers':getProfile[0].followers,'repos':repos,'last_updated':getProfile[0].last_updated,'refresh':refresh})
             else:
                 user_name=request.POST.get("selected_user")
@@ -60,7 +61,7 @@ def getUserDetails(request):
                 getProfile=Profile.objects.filter(user_id=user[0].pk)
                 followers=getProfile[0].followers
                 last_updated=getProfile[0].last_updated
-                repos=Repository.objects.filter(profile_id=Profile.objects.filter(user_id=user[0].pk)[0].pk)
+                repos=Repository.objects.filter(profile_id=Profile.objects.filter(user_id=user[0].pk)[0].pk).order_by('-stars')
                 pageHead=str(user[0].first_name)+' '+str(user[0].last_name)+'(@'+str(user[0].username)+')'
                 refresh=False
                 return render(request,'userprofile.html',{'pageHead':pageHead,'followers':followers,'repos':repos,'last_updated':last_updated,'refresh':refresh})
@@ -70,7 +71,7 @@ def getUserDetails(request):
                 getProfile=Profile.objects.filter(user_id=request.user.pk)
                 followers=getProfile[0].followers
                 last_updated=getProfile[0].last_updated
-                repos=Repository.objects.filter(profile_id=Profile.objects.filter(user_id=request.user.pk)[0].pk)
+                repos=Repository.objects.filter(profile_id=Profile.objects.filter(user_id=request.user.pk)[0].pk).order_by('-stars')
                 refresh=True
                 return render(request,'userprofile.html',{'pageHead':pageHead,'followers':followers,'repos':repos,'last_updated':last_updated,'refresh':refresh})
             else:
@@ -79,18 +80,18 @@ def getUserDetails(request):
                 if(data1.status_code==200 & data2.status_code==200):
                     json_data1=data1.json()
                     json_data2=data2.json()
-                    newprofile=Profile.objects.create(user=request.user,followers=json_data1['followers'],last_updated=json_data1['updated_at'])
+                    newprofile=Profile.objects.create(user=request.user,followers=json_data1['followers'],last_updated=datetime.now(pytz.timezone('Asia/Kolkata')))
                     for repos in json_data2:
                         repo=Repository(profile=newprofile,repo_name=repos['name'],stars=repos['stargazers_count'])
                         repo.save()
                     getProfile=Profile.objects.filter(user_id=request.user.pk)
                     followers=getProfile[0].followers
                     last_updated=getProfile[0].last_updated
-                    repos=Repository.objects.filter(profile_id=Profile.objects.filter(user_id=request.user.pk)[0].pk)
+                    repos=Repository.objects.filter(profile_id=Profile.objects.filter(user_id=request.user.pk)[0].pk).order_by('-stars')
                     refresh=True
                     return render(request,'userprofile.html',{'pageHead':pageHead,'followers':followers,'repos':repos,'last_updated':last_updated,'refresh':refresh})
                 else:
-                    return response.HttpResponse('Bhaag Chutiye')
+                    return response.HttpResponse('Error in Getting Data,Please Retry or Signup with correct github username')
     else:
         return response.HttpResponse('Plz login first')
 

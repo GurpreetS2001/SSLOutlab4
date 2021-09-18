@@ -7,9 +7,12 @@
 <form action='/accounts/profile/' method="POST">
     {% csrf_token %}
     {% for people in users %}
+        <p>
         {% if people.user.username != user.username %}
-            <input type="submit" value="{{people.user.username}}" name="selected_user"><br>
-        {% endif %}
+            <button type="submit" value="{{people.user.username}}" name="selected_user" class="btn btn-outline-primary">{{people.user.username}}</button><br>
+           <!--  <input type="submit" value="{{people.user.username}}" name="selected_user"><br> -->
+        {% endif %} 
+        </p>
     {% endfor %}
 </form>
 {% else %}
