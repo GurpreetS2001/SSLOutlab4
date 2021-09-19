@@ -35,7 +35,7 @@ def getUserDetails(request):
                 getProfile[0].save()
                 repos=Repository.objects.filter(profile_id=Profile.objects.filter(user_id=request.user.pk)[0].pk)
                 for i in range(0,repos.count()):
-                    repos[0].delete()
+                                     repos[0].delete()
                 for repos in json_data2:
                     repo=Repository(profile=getProfile[0],repo_name=repos['name'],stars=repos['stargazers_count'])
                     repo.save()
@@ -45,8 +45,7 @@ def getUserDetails(request):
                 #         repos[i].stars=json_data2[i]['stargazers_count']
                 #         repos[i].save()
                 #     for i in range(repos.count(),len(json_data2)):
-                #         repo=Repository(profile=getProfile[0],repo_name=json_data2[i]['name'],stars=json_data2[i]['stargazers_count'])
-                #         repo.save()
+                       #         repo.save()
                 # else:
                 #     for i in range(0,len(json_data2)):
                 #         repos[i].repo_name=json_data2[i]['name']

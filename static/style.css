@@ -1,0 +1,14 @@
+h1{
+    text-align: center;
+}
+
+h3{
+    color: red;
+    text-align: center;
+}
+
+#top{
+    background-color: lightgray; 
+    margin: 20px; 
+    padding: 20px;
+}
