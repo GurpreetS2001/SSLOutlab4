@@ -9,7 +9,7 @@ from django.utils import timezone
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     followers= models.IntegerField(null=True)
-    last_updated=models.DateTimeField(default=timezone.now)
+    last_updated=models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.name
 

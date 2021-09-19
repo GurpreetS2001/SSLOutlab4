@@ -31,7 +31,7 @@ def getUserDetails(request):
                 json_data2=data2.json()
                 getProfile=Profile.objects.filter(user_id=request.user.pk)
                 getProfile[0].followers=json_data1['followers']
-                getProfile[0].last_updated=datetime.now().astimezone(pytz.timezone('Asia/Kolkata')).replace(tzinfo=None)
+                #getProfile[0].last_updated=datetime.now().astimezone(pytz.timezone('Asia/Kolkata')).replace(tzinfo=None)
                 getProfile[0].save()
                 repos=Repository.objects.filter(profile_id=Profile.objects.filter(user_id=request.user.pk)[0].pk)
                 for i in range(0,repos.count()):

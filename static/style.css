@@ -12,3 +12,8 @@ h3{
     margin: 20px; 
     padding: 20px;
 }
+
+#bottom{
+    padding-left: 20%;
+    padding-right: 20%;
+}
