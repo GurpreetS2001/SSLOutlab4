@@ -4,9 +4,9 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-  <h1>{{pageHead}}</h1>
+  <h2>{{pageHead}}</h2>
   <h3>{{followers}} followers</h3>
-  <h3>profile last updated: {{last_updated}}</h3>
+  <h4>profile last updated: {{last_updated}}</h4>
   {% if refresh %}
   <form action='/accounts/profile/' method="POST" class="text-center">
   {% csrf_token %}
@@ -22,6 +22,6 @@
   
 {% else %}
   <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
+  <a href="{% url 'login' %}" class="btn btn-success">Log In</a>
 {% endif %}
 {% endblock %}}
