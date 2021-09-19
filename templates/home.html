@@ -5,10 +5,10 @@
 {% block content %}
 {% csrf_token %}
 {% if user.is_authenticated %}
-  <h3>Hi {{ user.username }}!</h3>
+  <h3>Hi {{ user.username }}! Youdid not log out the last time you accessed your profile here.</h3>
   <p><a href="{% url 'logout' %}" class="btn btn-success">Log Out</a></p>
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}" class="btn btn-success">Log In</a>
+  <p class="text-center">This web-app is built by Gurpreet Singh Wadhwa (200050046) and Molina Dhembla (200050076) as Outlab 4 submission for Software Systems Lab (CS251- Autumn 2021).</p>
+  <h3>Login/Signup to continue</h3>
 {% endif %}
 {% endblock %}}
