@@ -5,11 +5,11 @@ from django.contrib.auth.models import User
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from django.utils import timezone
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     followers= models.IntegerField(null=True)
-    last_updated=models.DateTimeField()
+    last_updated=models.DateTimeField(default=timezone.now)
     def __str__(self):
         return self.name
 
