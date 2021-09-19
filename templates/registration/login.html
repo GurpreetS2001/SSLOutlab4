@@ -3,7 +3,9 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<h1>Login with you GitHub Profiles credentials</h1>
+<div class="alert alert-info" role="alert">
+  Login with your GitHub Profiles account credentials
+</div>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
