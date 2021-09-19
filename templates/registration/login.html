@@ -3,7 +3,7 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<h1>Login to Github profile</h1>
+<h1>Login with you GitHub Profiles credentials</h1>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
