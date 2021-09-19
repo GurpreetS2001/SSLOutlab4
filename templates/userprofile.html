@@ -8,9 +8,9 @@
   <h3>{{followers}} followers</h3>
   <h3>profile last updated: {{last_updated}}</h3>
   {% if refresh %}
-  <form action='/accounts/profile/' method="POST">
+  <form action='/accounts/profile/' method="POST" class="text-center">
   {% csrf_token %}
-  <button type="submit" value="Refresh Data" name="selected_user" class="btn btn-link">Update Now</button>
+  <button type="submit" value="Refresh Data" name="selected_user" class="btn btn-link btn-lg" >Update Now</button>
   <!-- <input type="submit" value="Refresh Data" name="selected_user"> -->
   </form>
   {% endif %}
